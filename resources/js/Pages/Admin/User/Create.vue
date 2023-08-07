@@ -35,6 +35,8 @@
                                     <label for="phone" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Phone Number</label>
                                 </div>
                             </div>
+
+                            <!--Period Input-->
                             <div class="relative z-0 w-1/2  mb-6 group">
                                 <label for="period" class="sr-only">Underline select</label>
                                 <select id="period" v-model="form.year" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer" required>
@@ -43,13 +45,21 @@
                                 </select>
                             </div>
 
-                            <div class="relative z-0 w-1/2  mb-6 group">
-                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="small_size">Upload Your Photo Profile</label>
-                                <input @input="form.image = $event.target.files[0]"  class="block w-full mb-5 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="small_size" type="file">
-                                <progress v-if="form.image" :value="form.image.percentage" max="100">
-                                    {{ form.image.percentage }}% lalala
-                                </progress>
+                            <!--Role Radio Group-->
+
+                            <div class="flex">
+                                <h2 class="text-md font-semibold mr-2">User Role : </h2>
+                                <div class="flex items-center mr-4">
+                                    <input id="inline-radio" type="radio" v-model="form.role" value="Period Admin" name="inline-radio-group" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                    <label for="inline-radio" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Period Administrator</label>
+                                </div>
+                                <div class="flex items-center mr-4">
+                                    <input id="inline-2-radio" type="radio" v-model="form.role" value="User" name="inline-radio-group" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                    <label for="inline-2-radio" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">User</label>
+                                </div>
                             </div>
+
+
 
 
                             <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
@@ -74,8 +84,15 @@ import {Head, useForm} from "@inertiajs/vue3";
 const props = defineProps({
     periods : {
         required : true,
+    },
+    roles : {
+        required : true
     }
 })
+
+function submit(){
+    form.post(route('admin.users.store'))
+}
 
 const form = useForm({
     email : null,
@@ -83,9 +100,8 @@ const form = useForm({
     year : null,
     phone: null,
     npm : null,
-    image : null,
+    role: null,
     position: null
-
 })
 
 </script>
