@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('period_users', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->enum('role', ['Admin', 'Period Admin', 'User']);
+            $table->enum('role', ['Admin', 'Admin Period', 'User']);
             $table->foreignUuid('period_id')->nullable();
             $table->foreignUuid('user_id');
         });
