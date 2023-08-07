@@ -1,0 +1,18 @@
+<template>
+    <Head title="Periods"></Head>
+
+    <AdminLayout>
+        <template #header>
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Periods</h2>
+        </template>
+        <div>
+            <p>
+            </p>
+        </div>
+    </AdminLayout>
+</template>
+
+<script setup>
+import AdminLayout from "@/Layouts/AdminLayout.vue";
+</script>
+
