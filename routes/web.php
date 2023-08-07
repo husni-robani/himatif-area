@@ -40,6 +40,18 @@ Route::middleware('auth')->group(function () {
         Route::get('/admin/users', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('admin.users.index');
         Route::get('/admin/users/create', [\App\Http\Controllers\Admin\UserController::class, 'create'])->name('admin.users.create');
         Route::post('/admin/users/store', [\App\Http\Controllers\Admin\UserController::class, 'store'])->name('admin.users.store');
+
+        Route::get('admin/periods', [\App\Http\Controllers\Admin\PeriodController::class, 'index'])->name('admin.periods.index');
+
+        Route::get('/test', function (){
+            $user = \App\Models\User::where('name', 'Puspa Puspita')->first();
+            $imageService = new \App\Services\ImageService($user, '', 'images');
+            $imageService->deleteImage('image');
+
+            return 'success';
+
+
+        });
     });
 });
 
