@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Contracts\Services\ImageServiceInterface;
+use App\Contracts\Services\UserServiceInterface;
+use App\Services\ImageService;
+use App\Services\UserService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $this->app->bind(ImageServiceInterface::class, ImageService::class);
+        $this->app->bind(UserServiceInterface::class, UserService::class);
     }
 }
