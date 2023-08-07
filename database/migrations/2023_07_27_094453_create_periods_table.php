@@ -15,8 +15,10 @@ return new class extends Migration
             $table->uuid('id');
             $table->string('name')->unique();
             $table->integer('year',)->unique();
+            $table->text('description');
             $table->text('vision');
             $table->text('mission');
+            $table->boolean('active')->default(false);
             $table->timestamps();
         });
     }
