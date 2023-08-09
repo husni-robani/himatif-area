@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -26,7 +27,7 @@ Route::get('/', function () {
 
 
 Route::middleware('auth')->group(function () {
-    Route::middleware('user')->group(function() {
+    Route::middleware('user')->group(function () {
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -35,15 +36,18 @@ Route::middleware('auth')->group(function () {
         })->middleware('verified')->name('dashboard');
     });
 
-    Route::middleware('is_admin')->group(function (){
+    Route::middleware('is_admin')->group(function () {
         Route::get('/admin/dashboard', \App\Http\Controllers\Admin\DashboardController::class)->name('admin.dashboard');
-        Route::get('/admin/users', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('admin.users.index');
-        Route::get('/admin/users/create', [\App\Http\Controllers\Admin\UserController::class, 'create'])->name('admin.users.create');
-        Route::post('/admin/users/store', [\App\Http\Controllers\Admin\UserController::class, 'store'])->name('admin.users.store');
+        Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users.index');
+        Route::get('/admin/users/create', [UserController::class, 'create'])->name('admin.users.create');
+        Route::post('/admin/users/store', [UserController::class, 'store'])->name('admin.users.store');
+        Route::get('/admin/users/edit', [UserController::class, 'edit'])->name('admin.users.edit');
+        Route::delete('/admin/users/delete', [UserController::class, 'destroy'])->name('admin.users.destroy');
+        Route::patch('/admin/users/update', [UserController::class, 'update'])->name('admin.users.update');
 
         Route::get('admin/periods', [\App\Http\Controllers\Admin\PeriodController::class, 'index'])->name('admin.periods.index');
 
-        Route::get('/test', function (){
+        Route::get('/test', function () {
             $user = \App\Models\User::where('name', 'Puspa Puspita')->first();
             $imageService = new \App\Services\ImageService($user, '', 'images');
             $imageService->deleteImage('image');
@@ -55,4 +59,4 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
