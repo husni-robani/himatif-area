@@ -15,7 +15,6 @@ console.log(props.users);
 <template>
   <Head title="Users"></Head>
 
-  <!--TODO !!! : Add List of user (filter based on period) -->
   <AdminLayout>
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Users</h2>
@@ -35,7 +34,9 @@ console.log(props.users);
         </div>
         <div class="flow-root">
           <ul class="divide-y divide-gray-200 dark:divide-gray-700" role="list">
-            <li v-for="user in props.users" class="py-3 sm:py-4">
+            <li v-for="user in props.users"
+                :key="user.email"
+                class="py-3 sm:py-4">
               <div class="flex justify-between  items-center space-x-4">
                 <Link :data="{id : user.id}" :href="route('admin.users.edit')"
                       class="flex items-center space-x-4"
