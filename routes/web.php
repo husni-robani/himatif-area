@@ -41,21 +41,24 @@ Route::middleware('auth')->group(function () {
         Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users.index');
         Route::get('/admin/users/create', [UserController::class, 'create'])->name('admin.users.create');
         Route::post('/admin/users/store', [UserController::class, 'store'])->name('admin.users.store');
+        //TODO : change route admin.users.edit to route parameter
         Route::get('/admin/users/edit', [UserController::class, 'edit'])->name('admin.users.edit');
         Route::delete('/admin/users/delete', [UserController::class, 'destroy'])->name('admin.users.destroy');
         Route::patch('/admin/users/update', [UserController::class, 'update'])->name('admin.users.update');
 
         Route::get('admin/periods', [\App\Http\Controllers\Admin\PeriodController::class, 'index'])->name('admin.periods.index');
-
-        Route::get('/test', function () {
-            $user = \App\Models\User::where('name', 'Puspa Puspita')->first();
-            $imageService = new \App\Services\ImageService($user, '', 'images');
-            $imageService->deleteImage('image');
-
-            return 'success';
+        Route::delete('admin/periods/{year}', [\App\Http\Controllers\Admin\PeriodController::class, 'destroy'])->name('admin.periods.destroy');
+        Route::get('admin/periods/edit/{year}', [\App\Http\Controllers\Admin\PeriodController::class, 'edit'])->name('admin.periods.edit');
+        Route::post('admin/periods/newPeriod', [\App\Http\Controllers\Admin\PeriodController::class, 'store'])->name('admin.periods.store');
 
 
-        });
+//        Route::get('/test', function () {
+////            $user = \App\Models\User::where('name', 'Puspa Puspita')->first();
+////            $imageService = new \App\Services\ImageService($user, '', 'images');
+////            $imageService->deleteImage('image');
+//
+//            return 'success';
+//        })->name('test');
     });
 });
 
