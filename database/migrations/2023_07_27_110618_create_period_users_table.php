@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -15,8 +14,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->enum('role', ['Admin', 'Admin Period', 'User']);
-            $table->foreignUuid('period_id')->nullable();
-            $table->foreignUuid('user_id');
+            $table->foreignUuid('period_id')->constrained()->cascadeOnDelete();
+            $table->foreignUuid('user_id')->constrained()->cascadeOnDelete();
         });
     }
 
