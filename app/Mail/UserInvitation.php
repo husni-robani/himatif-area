@@ -31,7 +31,7 @@ class UserInvitation extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: 'himatif.area@widyatama.ac.id',
+            from: env('MAIL_FROM_ADDRESS', 'himatif.space@widyatama.ac.id'),
             subject: 'User Invitation',
         );
     }
