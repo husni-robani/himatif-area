@@ -10,12 +10,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('period_users', function (Blueprint $table) {
+        Schema::create('aspiration_links', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->enum('role', ['Admin', 'Admin Period', 'User']);
-            $table->foreignUuid('period_id')->constrained()->cascadeOnDelete();
-            $table->foreignUuid('user_id')->constrained()->cascadeOnDelete();
+            $table->text('link');
+            $table->string('token');
+            $table->string('email');
         });
     }
 
@@ -24,6 +24,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('period_users');
+        Schema::dropIfExists('aspiration_links');
     }
 };

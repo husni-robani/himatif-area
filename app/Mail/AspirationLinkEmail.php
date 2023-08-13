@@ -9,20 +9,18 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class UserInvitation extends Mailable
+class AspirationLinkEmail extends Mailable
 {
     use Queueable, SerializesModels;
-
-    private $password;
 
     /**
      * Create a new message instance.
      */
     public function __construct(
-        protected $user, $password
+        protected $link
     )
     {
-        $this->password = $password;
+        //
     }
 
     /**
@@ -32,7 +30,7 @@ class UserInvitation extends Mailable
     {
         return new Envelope(
             from: env('MAIL_FROM_ADDRESS', 'himatif.space@widyatama.ac.id'),
-            subject: 'User Invitation',
+            subject: 'Aspiration Link',
         );
     }
 
@@ -42,9 +40,9 @@ class UserInvitation extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'emails.UserInvitation',
+            markdown: 'emails.AspirationLink',
             with: [
-                'password' => $this->password
+                'link' => $this->link
             ]
         );
     }

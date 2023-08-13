@@ -10,12 +10,13 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('period_users', function (Blueprint $table) {
+        Schema::create('aspirations', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->integer('npm');
+            $table->text('aspiration');
+            $table->string('email');
             $table->timestamps();
-            $table->enum('role', ['Admin', 'Admin Period', 'User']);
-            $table->foreignUuid('period_id')->constrained()->cascadeOnDelete();
-            $table->foreignUuid('user_id')->constrained()->cascadeOnDelete();
         });
     }
 
@@ -24,6 +25,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('period_users');
+        Schema::dropIfExists('aspirations');
     }
 };

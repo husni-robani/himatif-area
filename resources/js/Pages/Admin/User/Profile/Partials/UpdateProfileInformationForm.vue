@@ -120,12 +120,11 @@ const form = useForm({
           <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">Period information</h3>
           <div>
             <div>
-              <InputLabel for="email" value="Year"/>
+              <InputLabel for="year" value="Year"/>
 
               <TextInput
-                  id="email"
+                  id="year"
                   v-model="props.user[0].year"
-                  autocomplete="username"
                   class="mt-1 block w-full text-gray-500"
                   disabled
                   type="text"
