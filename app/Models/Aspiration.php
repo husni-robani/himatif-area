@@ -11,6 +11,6 @@ class Aspiration extends Model
     use HasFactory, Notifiable;
 
     protected $fillable = [
-        'name', 'npm', 'aspiration'
+        'name', 'npm', 'aspiration', 'email'
     ];
 }
