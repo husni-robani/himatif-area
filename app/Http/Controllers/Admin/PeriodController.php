@@ -21,13 +21,8 @@ class PeriodController extends Controller
     public function store(PeriodFormRequest $request)
     {
         try {
-            $period = new Period();
-            $period->name = $request->name;
-            $period->year = $request->year;
-            $period->description = $request->description;
-            $period->vision = $request->vision;
-            $period->mission = $request->mission;
-            $period->save();
+            $period = Period::create($request->all());
+
         } catch (\Exception $exception) {
             return to_route('admin.periods.index');
         }
