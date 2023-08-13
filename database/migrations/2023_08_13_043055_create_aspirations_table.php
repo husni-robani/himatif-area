@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->string('name');
             $table->integer('npm');
             $table->text('aspiration');
+            $table->string('email');
             $table->timestamps();
         });
     }
