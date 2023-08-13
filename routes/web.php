@@ -23,10 +23,12 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('welcome');
 
 Route::get('/aspiration', [\App\Http\Controllers\AspirationController::class, 'index'])->name('aspiration.index');
-Route::post('/aspiration', [\App\Http\Controllers\AspirationController::class, 'storeEmail'])->name('aspiration.store-email');
+Route::post('/aspiration/email', [\App\Http\Controllers\AspirationController::class, 'storeEmail'])->name('aspiration.store-email');
+Route::get('/aspiration/{token}', [\App\Http\Controllers\AspirationController::class, 'create'])->name('aspiration.create');
+Route::post('aspiration/{token}', [\App\Http\Controllers\AspirationController::class, 'store'])->name('aspiration.store');
 
 
 Route::middleware('auth')->group(function () {
