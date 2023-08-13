@@ -27,7 +27,7 @@ Route::get('/', function () {
 
 Route::get('/aspiration', [\App\Http\Controllers\AspirationController::class, 'index'])->name('aspiration.index');
 Route::post('/aspiration/email', [\App\Http\Controllers\AspirationController::class, 'storeEmail'])->name('aspiration.store-email');
-Route::get('/aspiration/{token}', [\App\Http\Controllers\AspirationController::class, 'create'])->name('aspiration.create');
+Route::get('/aspiration/{token}', [\App\Http\Controllers\AspirationController::class, 'create'])->name('aspiration.create')->middleware('aspiration');
 Route::post('aspiration/{token}', [\App\Http\Controllers\AspirationController::class, 'store'])->name('aspiration.store');
 
 
