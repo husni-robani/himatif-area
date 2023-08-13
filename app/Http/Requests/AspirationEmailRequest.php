@@ -25,4 +25,11 @@ class AspirationEmailRequest extends FormRequest
             'email' => 'required|email|ends_with:@widyatama.ac.id'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'email.ends_with' => 'use widyatama email'
+        ];
+    }
 }
