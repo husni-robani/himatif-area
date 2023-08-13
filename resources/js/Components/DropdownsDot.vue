@@ -2,7 +2,7 @@
   <Menu as="div" class="relative inline-block text-left">
     <div>
       <MenuButton
-          class="bg-gray-100 rounded-full flex items-center text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
+          class="bg-gray-100 rounded-full flex items-center text-gray-400 hover:text-gray-600">
         <span class="sr-only">Open options</span>
         <component :is="props.iconType" aria-hidden="true" class="h-7 w-7"/>
       </MenuButton>
