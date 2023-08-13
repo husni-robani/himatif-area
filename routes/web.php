@@ -25,6 +25,9 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/aspiration', [\App\Http\Controllers\AspirationController::class, 'index'])->name('aspiration.index');
+Route::post('/aspiration', [\App\Http\Controllers\AspirationController::class, 'storeEmail'])->name('aspiration.store-email');
+
 
 Route::middleware('auth')->group(function () {
     Route::middleware('user')->group(function () {
