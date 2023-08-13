@@ -22,10 +22,13 @@ createInertiaApp({
                 position: "top-right",
                 notifications: {
                     global: {
-                        duration: 10000
+                        duration: 5000
                     },
                     success: {
                         title: 'Success'
+                    },
+                    error: {
+                        title: 'error'
                     },
                 },
             })
