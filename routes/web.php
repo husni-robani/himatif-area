@@ -50,7 +50,8 @@ Route::middleware('auth')->group(function () {
         Route::delete('admin/periods/{year}', [\App\Http\Controllers\Admin\PeriodController::class, 'destroy'])->name('admin.periods.destroy');
         Route::get('admin/periods/edit/{year}', [\App\Http\Controllers\Admin\PeriodController::class, 'edit'])->name('admin.periods.edit');
         Route::post('admin/periods/newPeriod', [\App\Http\Controllers\Admin\PeriodController::class, 'store'])->name('admin.periods.store');
-
+        Route::patch('admin/periods/update/{year}', [\App\Http\Controllers\Admin\PeriodController::class, 'update'])->name('admin.periods.update');
+        Route::post('admin/periods/activeStatus/{year}', [\App\Http\Controllers\Admin\PeriodController::class, 'changeActive'])->name('admin.periods.activeStatus');
 
 //        Route::get('/test', function () {
 ////            $user = \App\Models\User::where('name', 'Puspa Puspita')->first();
