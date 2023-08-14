@@ -5,7 +5,7 @@ namespace App\Services\Period;
 use App\Contracts\Services\Period\GetPeriodIdInterface;
 use App\Models\Period;
 
-class GetPeriodId implements GetPeriodIdInterface
+class GetPeriodId
 {
     public function getIdFromYear($year): string
     {

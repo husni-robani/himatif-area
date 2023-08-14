@@ -10,7 +10,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class UserService implements UserServiceInterface
+class UserService
 {
     private User $user;
     private string $password;
