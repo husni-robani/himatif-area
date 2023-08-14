@@ -23,7 +23,5 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->app->bind(ImageServiceInterface::class, ImageService::class);
-        $this->app->bind(UserServiceInterface::class, UserService::class);
     }
 }
