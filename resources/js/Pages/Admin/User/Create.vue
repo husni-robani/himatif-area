@@ -131,7 +131,7 @@
 
 <script setup>
 import AdminLayout from "@/Layouts/AdminLayout.vue";
-import {Head, useForm} from "@inertiajs/vue3";
+import {Head, useForm, usePage} from "@inertiajs/vue3";
 import {usePush} from "notivue";
 import InputError from "@/Components/InputError.vue";
 

@@ -4,9 +4,9 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Enums\UserRoleEnum;
-use App\Models\Period;
-use App\Models\PeriodUser;
-use App\Models\User;
+use App\Providers\Models\Period;
+use App\Providers\Models\PeriodUser;
+use App\Providers\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
             'npm' => '00000000'
         ]);
 
-        $period = Period::create(['name' => 'GEN 20', 'vision' => 'TEST', 'mission' => 'TEST', 'year' => 2020, 'description' => 'TEST', 'active'=> true]);
+        $period = Period::create(['name' => 'GEN 20', 'vision' => 'TEST', 'mission' => 'TEST', 'year' => 2020, 'description' => 'TEST', 'active' => true]);
         $user = $period->users()->create([
             'name' => 'Husni Robani',
             'email' => 'husni.robani@widyatama.ac.id',

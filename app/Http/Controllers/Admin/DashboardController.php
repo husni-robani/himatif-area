@@ -9,7 +9,7 @@ use Inertia\Response;
 
 class DashboardController extends Controller
 {
-    public function __invoke()
+    public function __invoke(Request $request)
     {
         return Inertia::render('Admin/Dashboard');
     }

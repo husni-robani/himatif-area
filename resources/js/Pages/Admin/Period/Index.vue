@@ -116,17 +116,20 @@ import AdminLayout from "@/Layouts/AdminLayout.vue";
 import {Head, useForm, usePage} from "@inertiajs/vue3";
 import ListPeriod from "@/Pages/Admin/Period/partials/ListPeriod.vue";
 import SlideOvers from "@/Components/SlideOvers.vue";
-import {ref, watch, watchEffect} from "vue";
+import {onBeforeMount, onMounted, ref, watch, watchEffect} from "vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import InputError from "@/Components/InputError.vue";
 import {usePush} from "notivue";
+import {formToJSON} from "axios";
 
 const props = defineProps({
   periods: {
     required: true
   }
 })
+
+const page = usePage();
 const open = ref(false);
 const push = usePush();
 
@@ -137,6 +140,18 @@ const form = useForm({
   vision: null,
   mission: null
 })
+
+onMounted(() => {
+  console.log(page.props.flash.failed);
+
+  if (page.props.flash.failed != null) {
+    push.error({
+      message: page.props.flash.failed
+    })
+  }
+})
+
+console.log(page.props.flash.failed)
 
 function toggle() {
   open.value = false;
