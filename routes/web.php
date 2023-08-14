@@ -65,6 +65,11 @@ Route::middleware('auth')->group(function () {
 //
 //            return 'success';
 //        })->name('test');
+
+        Route::get('/test2', function () {
+            $period = \App\Services\Period\GetPeriodService::getActivatedPeriod();
+            dd($period);
+        });
     });
 });
 

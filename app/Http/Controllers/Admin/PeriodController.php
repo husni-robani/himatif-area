@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\PeriodFormRequest;
-use App\Models\Period;
+use App\Providers\Models\Period;
+use App\Services\Period\GetPeriodService;
+use App\Services\Period\PeriodActiveStatusService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -30,30 +32,36 @@ class PeriodController extends Controller
         return to_route('admin.periods.index');
     }
 
-    public function destroy(string $year)
+    public function destroy(Request $request, string $year)
     {
-        $period = Period::where('year', $year)->first();
-        $period->delete();
-
-        return to_route('admin.periods.index')->with('success', 'Deleting period success');
+        try {
+            //Todo: !!! tambahkan logic, apabila period yang akan di hapus merupakan period aktif, maka pindahkan status active ke period lain, apabila tidak ada lagi period, maka penghapusan tidak bisa
+            $period = GetPeriodService::getFromYear($year);
+            if ($period->getAttribute('active')) {
+                return to_route('admin.periods.index');
+            }
+            $period->delete();
+            return to_route('admin.periods.index')->with('success', 'Deleting period success');
+        } catch (\Throwable $exception) {
+            return $exception;
+        }
     }
 
     public function edit(string $year)
     {
-        $period = Period::where('year', $year)->first();
-        return Inertia::render('Admin/Period/Edit', compact('period'));
+        try {
+            $period = GetPeriodService::getFromYear($year);
+            return Inertia::render('Admin/Period/Edit', compact('period'));
+        } catch (\Exception $exception) {
+            return $exception;
+        }
     }
 
     public function update(Request $request, $year)
     {
         try {
-            $period = Period::where('year', $year)->first();
-            $period->name = $request->name;
-            $period->year = $request->year;
-            $period->description = $request->description;
-            $period->vision = $request->vision;
-            $period->mission = $request->mission;
-            $period->save();
+            $period = GetPeriodService::getFromYear($year);
+            $period->update($request->all());
         } catch (\Exception $exception) {
             return $exception;
         }
@@ -65,17 +73,16 @@ class PeriodController extends Controller
     {
 
         try {
-            $activePeriod = Period::where('active', 1)->first();
-            $activePeriod->active = 0;
-            $activePeriod->save();
-
-            $period = Period::where('year', $year)->first();
-            $period->active = 1;
-            $period->save();
+            $period = GetPeriodService::getFromYear($year);
+            $result = (new PeriodActiveStatusService())->changeActiveStatusTo($period);
+            if ($result) {
+                return to_route('admin.periods.index')->isSuccessful();
+            } else {
+                return to_route('admin.periods.index')->isInvalid();
+            }
         } catch (\Exception $exception) {
             return $exception;
         }
 
-        return to_route('admin.periods.index');
     }
 }

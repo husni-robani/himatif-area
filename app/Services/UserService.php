@@ -4,9 +4,7 @@ namespace App\Services;
 
 use App\Contracts\Services\UserServiceInterface;
 use App\Enums\UserRoleEnum;
-use App\Models\Period;
-use App\Models\PeriodUser;
-use App\Models\User;
+use App\Providers\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 

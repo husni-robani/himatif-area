@@ -6,16 +6,12 @@ use App\Enums\UserRoleEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoredUserRequest;
 use App\Mail\UserInvitation;
-use App\Models\Period;
-use App\Models\User;
-use App\Services\ImageService;
-use App\Services\Period\GetPeriodId;
+use App\Providers\Models\Period;
+use App\Providers\Models\User;
+use App\Services\Period\GetPeriodService;
 use App\Services\UserService;
-use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class UserController extends Controller
@@ -57,8 +53,8 @@ class UserController extends Controller
     {
         try {
             $userService = new UserService();
-            $getPeriodIdService = new GetPeriodId();
-            $request->merge(['password' => $userService->generateRandomPassword(), 'period_id' => $getPeriodIdService->getIdFromYear($request->input('year'))]);
+            $getPeriodFromYear = GetPeriodService::getFromYear($request->input('year'));
+            $request->merge(['password' => $userService->generateRandomPassword(), 'period_id' => $getPeriodFromYear->id]);
             $user = $userService->createUser($request, $request->enum('role', UserRoleEnum::class));
             Mail::to($user)->send(new UserInvitation($user, $userService->getPassword()));
 

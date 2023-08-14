@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Providers\Models;
 
 use App\Enums\UserRoleEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
