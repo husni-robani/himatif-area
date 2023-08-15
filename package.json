@@ -19,6 +19,7 @@
         "vue": "^3.2.41"
     },
     "dependencies": {
+        "@duskmoon/vue3-typed-js": "^0.0.4",
         "@headlessui/vue": "^1.7.15",
         "@heroicons/vue": "^2.0.18",
         "flowbite": "^1.8.1",
