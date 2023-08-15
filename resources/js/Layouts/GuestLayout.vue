@@ -1,5 +1,9 @@
 <template xmlns="http://www.w3.org/1999/html">
-  <div class="bg-white">
+  <Notivue v-slot="item">
+    <Notifications :item="item" :theme="materialTheme"/>
+  </Notivue>
+
+  <div class="relative bg-gray-100  min-h-screen">
     <Header/>
 
     <main class="mt-10">
