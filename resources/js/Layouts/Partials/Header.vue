@@ -23,9 +23,17 @@
             </Link>
           </PopoverGroup>
           <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-            <Link :href="route('login')"
+            <Link v-if="$page.props.auth.user === null" :href="route('login')"
                   class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"> Sign in
             </Link>
+            <div v-else>
+              <Link v-show="$page.props.auth.user.admin" :href="route('admin.dashboard')"
+                    class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"> Dashboard
+              </Link>
+              <Link v-show="!$page.props.auth.user.admin" :href="route('dashboard')"
+                    class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"> Dashboard
+              </Link>
+            </div>
           </div>
         </div>
       </div>
