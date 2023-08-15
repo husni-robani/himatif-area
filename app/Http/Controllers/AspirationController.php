@@ -62,11 +62,18 @@ class AspirationController extends Controller
                 'email' => $linkToken->email,
                 'aspiration' => $request->aspiration
             ]);
+            $email = $linkToken->email;
+            $linkToken->delete();
+            return to_route('aspiration.success', $email);
         } catch (\Exception $exception) {
             return $exception;
         }
-        $linkToken->delete();
+    }
 
-        return to_route('welcome');
+    public function success($email)
+    {
+        return Inertia::render('SuccessSendAspiration', [
+            'email' => $email
+        ]);
     }
 }
