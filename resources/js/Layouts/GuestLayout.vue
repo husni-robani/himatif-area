@@ -6,7 +6,9 @@
       <slot/>
     </main>
 
-    <Footer/>
+    <div class="absolute inset-x-0 bottom-0">
+      <Footer/>
+    </div>
   </div>
 </template>
 
