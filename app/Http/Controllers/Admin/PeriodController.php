@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\PeriodFormRequest;
-use App\Providers\Models\Period;
+use App\Models\Period;
 use App\Services\Period\GetPeriodService;
 use App\Services\Period\PeriodActiveStatusService;
 use Illuminate\Http\Request;

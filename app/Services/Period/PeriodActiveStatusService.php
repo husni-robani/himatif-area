@@ -2,7 +2,7 @@
 
 namespace App\Services\Period;
 
-use App\Providers\Models\Period;
+use App\Models\Period;
 
 class PeriodActiveStatusService
 {

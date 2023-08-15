@@ -4,9 +4,9 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Enums\UserRoleEnum;
-use App\Providers\Models\Period;
-use App\Providers\Models\PeriodUser;
-use App\Providers\Models\User;
+use App\Models\Period;
+use App\Models\PeriodUser;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
