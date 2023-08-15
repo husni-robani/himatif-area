@@ -31,12 +31,12 @@
             </div>
             <div class="relative">
               <div class="sm:text-center">
-                <h2 class="text-3xl font-extrabold text-white tracking-tight sm:text-4xl">Get notified when we&rsquo;re
-                  launching.</h2>
+                <h2 class="text-3xl font-extrabold text-white tracking-tight sm:text-4xl">Get The Link for aspiration
+                  link</h2>
                 <p class="mt-6 mx-auto max-w-2xl text-lg text-white">Sagittis scelerisque nulla cursus in enim
                   consectetur quam. Dictum urna sed consectetur neque tristique pellentesque.</p>
               </div>
-              <form class="mt-12 sm:mx-auto sm:max-w-lg sm:flex" method="post" @submi.prevent="submit">
+              <form class="mt-12 sm:mx-auto sm:max-w-lg sm:flex" method="post" @click.prevent="submit">
                 <div class="min-w-0 flex-1">
                   <label class="sr-only" for="cta-email">Email address</label>
                   <input id="cta-email"
@@ -44,7 +44,7 @@
                          class="block w-full border border-transparent rounded-md px-5 py-3 text-base text-gray-900 placeholder-gray-500 shadow-sm focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-accent"
                          placeholder="Enter your email"
                          type="email"/>
-                  <InputError :message="form.errors.email"/>
+                  <InputError :message="form.errors.email" class="text-white"/>
                 </div>
                 <div class="mt-4 sm:mt-0 sm:ml-3">
                   <PrimaryButton
