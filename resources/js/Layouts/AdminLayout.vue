@@ -112,6 +112,9 @@ const footerNavigation = [
                 <NavLink :active="route().current('admin.periods.index')" :href="route('admin.periods.index')">
                   Periods
                 </NavLink>
+                <NavLink :active="route().current('admin.aspiration.index')" :href="route('admin.aspiration.index')">
+                  Aspirations
+                </NavLink>
               </div>
             </div>
 
