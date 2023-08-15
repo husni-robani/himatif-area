@@ -29,6 +29,7 @@ Route::get('/aspiration', [\App\Http\Controllers\AspirationController::class, 'i
 Route::post('/aspiration/email', [\App\Http\Controllers\AspirationController::class, 'storeEmail'])->name('aspiration.store-email');
 Route::get('/aspiration/{token}', [\App\Http\Controllers\AspirationController::class, 'create'])->name('aspiration.create')->middleware('aspiration');
 Route::post('aspiration/{token}', [\App\Http\Controllers\AspirationController::class, 'store'])->name('aspiration.store');
+Route::get('aspiration/success/{email}', [\App\Http\Controllers\AspirationController::class, 'success'])->name('aspiration.success');
 
 
 Route::middleware('auth')->group(function () {
@@ -57,6 +58,9 @@ Route::middleware('auth')->group(function () {
         Route::post('admin/periods/newPeriod', [\App\Http\Controllers\Admin\PeriodController::class, 'store'])->name('admin.periods.store');
         Route::patch('admin/periods/update/{year}', [\App\Http\Controllers\Admin\PeriodController::class, 'update'])->name('admin.periods.update');
         Route::post('admin/periods/activeStatus/{year}', [\App\Http\Controllers\Admin\PeriodController::class, 'changeActive'])->name('admin.periods.activeStatus');
+
+        Route::get('admin/aspiration', [\App\Http\Controllers\Admin\AspirationController::class, 'index'])->name('admin.aspiration.index');
+        Route::delete('admin/aspiration/{id}', [\App\Http\Controllers\Admin\AspirationController::class, 'destroy'])->name('admin.aspiration.destroy');
 
 //        Route::get('/test', function () {
 ////            $user = \App\Models\User::where('name', 'Puspa Puspita')->first();
