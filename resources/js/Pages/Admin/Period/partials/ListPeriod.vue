@@ -23,7 +23,7 @@
           <!----Dropdown---->
           <DropdownsDot>
             <template #menu>
-              <MenuItem v-slot="{ active }">
+              <MenuItem v-show="period.active === 0" v-slot="{ active }">
                 <button
                     class="block px-4 py-2 w-full hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-red-500"
                     @click.prevent="deletePeriod(period.year)"
@@ -43,9 +43,8 @@
                       method="get">Detail
                 </Link>
               </MenuItem>
-              <MenuItem v-slot="{ active }">
+              <MenuItem v-show="period.active === 0" v-slot="{ active }">
                 <button
-                    v-show="period.active === 0"
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                     @click.prevent="changeActiveStatus(period.year)">
                   Set As Active
@@ -67,7 +66,9 @@ import DropdownsDot from "@/Components/DropdownsDot.vue";
 import {MenuItem} from "@headlessui/vue";
 import {usePush} from "notivue";
 
-const formDelete = useForm({})
+const formDelete = useForm({
+  year: null
+})
 const push = usePush();
 
 function changeActiveStatus(year) {
@@ -81,7 +82,11 @@ function changeActiveStatus(year) {
 }
 
 function deletePeriod(year) {
-  formDelete.delete(route('admin.periods.destroy', year), {
+  formDelete.transform(
+      (data) => ({
+        year: year
+      })
+  ).delete(route('admin.periods.destroy', year), {
     onSuccess: () => {
       push.warning({
         title: 'Delete Success',

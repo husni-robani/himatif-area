@@ -12,10 +12,10 @@ class Period extends Model
     use HasFactory, HasUuids;
 
     protected $fillable = [
-      'vision', 'mission'
+        'vision', 'mission', 'name', 'description', 'year'
     ];
 
-    public function users() : HasMany
+    public function users(): HasMany
     {
         return $this->hasMany(User::class);
     }

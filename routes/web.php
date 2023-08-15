@@ -17,7 +17,7 @@ use Inertia\Inertia;
 |
 */
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
+    return Inertia::render('Guest/Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
@@ -65,6 +65,11 @@ Route::middleware('auth')->group(function () {
 //
 //            return 'success';
 //        })->name('test');
+
+        Route::get('/test2', function () {
+            $period = \App\Services\Period\GetPeriodService::getActivatedPeriod();
+            dd($period);
+        });
     });
 });
 

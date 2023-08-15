@@ -4,16 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Enums\UserRoleEnum;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoredUserRequest;
 use App\Mail\UserInvitation;
 use App\Models\Period;
 use App\Models\User;
-use App\Services\ImageService;
+use App\Services\Period\GetPeriodService;
 use App\Services\UserService;
-use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class UserController extends Controller
@@ -51,19 +49,23 @@ class UserController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StoredUserRequest $request)
     {
-        $userService = new UserService();
-        $user = $userService->createUser($request);
+        try {
+            $userService = new UserService();
+            $getPeriodFromYear = GetPeriodService::getFromYear($request->input('year'));
+            $request->merge(['password' => $userService->generateRandomPassword(), 'period_id' => $getPeriodFromYear->id]);
+            $user = $userService->createUser($request, $request->enum('role', UserRoleEnum::class));
+            Mail::to($user)->send(new UserInvitation($user, $userService->getPassword()));
 
-        Mail::to($user)->send(new UserInvitation($user, $userService->getPassword()));
+            return to_route('admin.users.index');
+        } catch (\Throwable $exception) {
+            return $exception;
+        }
 
-        return redirect(route('admin.dashboard'));
 
-
-        //TODO : Implement upload image on user profile
         //        $imageService = new ImageService(User::first());
-//        $image = $imageService->uploadImage($request->file('image'), 'images');
+        //        $image = $imageService->uploadImage($request->file('image'), 'images');
     }
 
     public function edit(Request $request)

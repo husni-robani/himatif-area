@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('aspirations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('npm');
+            $table->string('npm');
             $table->text('aspiration');
             $table->string('email');
             $table->timestamps();

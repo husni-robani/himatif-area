@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
             'npm' => '00000000'
         ]);
 
-        $period = Period::create(['name' => 'GEN 20', 'vision' => 'TEST', 'mission' => 'TEST', 'year' => 2020, 'description' => 'TEST', 'active'=> true]);
+        $period = Period::create(['name' => 'GEN 20', 'vision' => 'TEST', 'mission' => 'TEST', 'year' => 2020, 'description' => 'TEST', 'active' => true]);
         $user = $period->users()->create([
             'name' => 'Husni Robani',
             'email' => 'husni.robani@widyatama.ac.id',
