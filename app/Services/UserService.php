@@ -25,7 +25,6 @@ class UserService
         $user = User::create($createUserRequest);
 
         $this->user = $user;
-        $this->password = $user->password;
 
         //Create Period_User
         $user->periodUser()->create([
@@ -37,7 +36,9 @@ class UserService
 
     public function generateRandomPassword($length = 10): string
     {
-        return Str::random($length);
+        $password = Str::random($length);
+        $this->password = $password;
+        return $password;
     }
 
     public function getPassword()
