@@ -4,10 +4,10 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <div class="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
           <div class="flex justify-start lg:w-0 lg:flex-1">
-            <a href="#">
+            <Link :href="route('welcome')">
               <span class="sr-only">Workflow</span>
               <HimatifPrimaryLogo class="h-16 w-16 "/>
-            </a>
+            </Link>
           </div>
           <div class="-mr-2 -my-2 md:hidden">
             <PopoverButton
@@ -18,12 +18,22 @@
           </div>
           <PopoverGroup as="nav" class="hidden md:flex space-x-10">
             <a class="text-base font-medium text-gray-500 hover:text-gray-900" href="#"> About </a>
-            <a class="text-base font-medium text-gray-500 hover:text-gray-900" href="#"> Aspiration </a>
+            <Link :href="route('aspiration.index')" class="text-base font-medium text-gray-500 hover:text-gray-900">Send
+              Your Aspiration
+            </Link>
           </PopoverGroup>
           <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-            <Link :href="route('login')"
+            <Link v-if="$page.props.auth.user === null" :href="route('login')"
                   class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"> Sign in
             </Link>
+            <div v-else>
+              <Link v-show="$page.props.auth.user.admin" :href="route('admin.dashboard')"
+                    class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"> Dashboard
+              </Link>
+              <Link v-show="!$page.props.auth.user.admin" :href="route('dashboard')"
+                    class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"> Dashboard
+              </Link>
+            </div>
           </div>
         </div>
       </div>
